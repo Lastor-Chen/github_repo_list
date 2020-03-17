@@ -1,14 +1,47 @@
 <template>
   <div class="card">
     <img
-      src="https://avatars2.githubusercontent.com/u/53220217?v=4"
+      :src="user.avatar_url"
       alt="user_avatar"
-      title="Lastor-Chen"
+      :title="user.accountName"
       class="card-img-top"
     >
     <div class="card-body">
-      <h5>Lastor</h5>
-      <p class="mb-0">Lastor-Chen</p>
+      <h5>{{user.name}}</h5>
+      <p class="mb-0">{{user.accountName}}</p>
     </div>
   </div>
 </template>
+
+<script>
+module.exports = {
+  data() {
+    return {
+      user: {
+        avatar_url: '',
+        name: '',
+        accountName: ''
+      }
+    }
+  },
+  created() {
+    this.fetchOwner()
+  },
+  methods: {
+    async fetchOwner() {
+      try {
+        const { data } = await axios.get('https://api.github.com/users/lastor-chen')
+
+        this.user = {
+          avatar_url: data.avatar_url,
+          name: data.name,
+          accountName: data.login
+        }
+
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+}
+</script>
