@@ -41,14 +41,14 @@ module.exports = {
   methods: {
     async fetchRepos() {
       try {
-        const { data } = await axios.get('https://api.github.com/users/lastor-chen/repos?sort=created')
+        const { data } = await axios.get('https://api.github.com/users/lastor-chen/repos?sort=updated')
 
         this.repos = data.map(repo => ({
           id: repo.id,
           name: repo.name,
           description: repo.description,
           html_url: repo.html_url,
-          created_at: repo.created_at
+          updated_at: repo.updated_at
         }))
 
       } catch (err) {
