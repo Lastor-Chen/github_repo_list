@@ -16,19 +16,25 @@
 <body>
   <div id="app">
     <div class="container pt-5">
-    <div class="row">
-      <aside class="col-md-3">
-        <user-card/>
-      </aside>
-      <div class="col-md-9">
-        <span class="font-weight-bold">Repositories</span>
-        <hr>
-        <main role="main">
-          <repo-card/>
-        </main>
+      <div class="row">
+        <aside class="col-md-3">
+          <user-card/>
+        </aside>
+        <div class="col-md-9">
+          <span class="font-weight-bold">Repositories</span>
+          <span>{{repos.length}}</span>
+          <hr>
+          <main role="main">
+            <repo-card
+              class="mb-3"
+              v-for="repo in repos"
+              :key="repo.id"
+              :repo="repo"
+            />
+          </main>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <script src="./main.js"></script>
