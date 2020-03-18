@@ -34,15 +34,16 @@ module.exports = {
   data() {
     return {
       repos: [],
-      page: 1
+      page: 1,
+      observe: null  // 監看滾動分頁
     }
   },
   created() {
     this.fetchRepos(this.page)
   },
   mounted() {
-    const ob = new IntersectionObserver(this.loadMoreRepos)
-    ob.observe(this.$refs.ob)
+    this.observe = new IntersectionObserver(this.loadMoreRepos)
+    this.observe.observe(this.$refs.ob)
   },
   methods: {
     async fetchRepos(page) {
@@ -60,12 +61,14 @@ module.exports = {
         }))
 
         this.repos.push(...newRepos)
+        return data.length
 
       } catch (err) {
         console.log(err)
       }
     },
     async loadMoreRepos(entries) {
+      // ob 初始化時，不加載
       const { isIntersecting } = entries[0]
       const windowHeight = window.innerHeight
       const obPosition = this.$refs.ob.offsetTop
@@ -74,7 +77,13 @@ module.exports = {
 
       // 滿足條件時 loadMore
       this.page += 1
-      this.fetchRepos(this.page)
+      const size = await this.fetchRepos(this.page)
+
+      // 如分頁資料已全數加載，移除 observe
+      if (size < LIMIT) {
+        this.observe.disconnect()
+        this.observe = null
+      }
     }
   }
 }
