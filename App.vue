@@ -1,21 +1,22 @@
 <template>
-  <div class="container pt-5">
+  <div class="container py-5">
     <div class="row">
-      <aside class="col-md-3">
+      <div class="col-md-3">
         <user-card/>
-      </aside>
+      </div>
       <div class="col-md-9">
         <span class="font-weight-bold">Repositories</span>
         <span>{{repos.length}}</span>
         <hr>
-        <main role="main">
+        <div class="position-relative">
           <repo-card
             class="mb-3"
             v-for="repo in repos"
             :key="repo.id"
             :repo="repo"
           />
-        </main>
+        </div>
+        <div id="ob" ref="ob"></div>
       </div>
     </div>
   </div>
@@ -32,18 +33,24 @@ module.exports = {
   },
   data() {
     return {
-      repos: []
+      repos: [],
+      limit: 6,
+      page: 1
     }
   },
   created() {
-    this.fetchRepos()
+    this.fetchRepos(this.page)
+  },
+  mounted() {
+    const ob = new IntersectionObserver(this.loadMoreRepos)
+    ob.observe(this.$refs.ob)
   },
   methods: {
-    async fetchRepos() {
+    async fetchRepos(page) {
       try {
-        const { data } = await axios.get('https://api.github.com/users/lastor-chen/repos?sort=updated')
+        const { data } = await getRepos({ page, limit: this.limit})
 
-        this.repos = data.map(repo => ({
+        const newRepos = data.map(repo => ({
           id: repo.id,
           name: repo.name,
           description: repo.description,
@@ -51,9 +58,22 @@ module.exports = {
           updated_at: repo.updated_at
         }))
 
+        this.repos.push(...newRepos)
+
       } catch (err) {
         console.log(err)
       }
+    },
+    async loadMoreRepos(entries) {
+      const { isIntersecting } = entries[0]
+      const windowHeight = window.innerHeight
+      const obPosition = this.$refs.ob.offsetTop
+      const isOverWindow = obPosition > windowHeight
+      if (!isIntersecting || !isOverWindow) return
+
+      // 滿足條件時 loadMore
+      this.page += 1
+      this.fetchRepos(this.page)
     }
   }
 }
