@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card avatar-card-rwd">
     <img
       :src="user.avatar_url"
       alt="user_avatar"
@@ -45,3 +45,12 @@ module.exports = {
   }
 }
 </script>
+
+<style scoped>
+@media screen and (max-width: 767.98px) {
+  .avatar-card-rwd {
+    max-width: 253px;
+    margin: 0 auto;
+  }
+}
+</style>

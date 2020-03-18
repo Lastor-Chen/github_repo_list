@@ -5,8 +5,10 @@
         <user-card/>
       </div>
       <div class="col-md-9">
-        <span class="font-weight-bold">Repositories</span>
-        <span class="badge badge-pill badge-secondary">{{repos.length}}</span>
+        <div class="mt-3 mt-md-0 text-center text-md-left">
+          <span class="font-weight-bold">Repositories</span>
+          <span class="badge badge-pill badge-secondary">{{repos.length}}</span>
+        </div>
         <hr>
         <div class="position-relative">
           <repo-card
