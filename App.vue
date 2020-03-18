@@ -77,7 +77,7 @@ module.exports = {
 
       } catch (err) {
         this.isLoading = false
-        console.log(err)
+        Swal.fire('503', '無法取得 Repositories，請稍後再試', 'error')
       }
     },
     async loadMoreRepos(entries) {

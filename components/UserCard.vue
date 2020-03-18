@@ -41,7 +41,7 @@ module.exports = {
         this.$emit('after-fetch-user', data.public_repos)
 
       } catch (err) {
-        console.log(err)
+        Swal.fire('503', '無法取得 User，請稍後再試', 'error')
       }
     }
   }
