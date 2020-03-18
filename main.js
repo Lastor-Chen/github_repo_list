@@ -8,10 +8,11 @@ const apiHelper = axios.create({
 
 const USER = 'lastor-chen'  // github username
 const LIMIT = 7             // page limit
+const SORT_BY = 'pushed'
 
 const githubAPI = {
   getRepos(page) {
-    return apiHelper.get(`/users/${USER}/repos?sort=updated&page=${page}&per_page=${LIMIT}`)
+    return apiHelper.get(`/users/${USER}/repos?sort=${SORT_BY}&page=${page}&per_page=${LIMIT}`)
   },
   getUser() {
     return apiHelper.get(`https://api.github.com/users/${USER}`)

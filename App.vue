@@ -2,7 +2,9 @@
   <div class="container py-5">
     <div class="row">
       <div class="col-md-3">
-        <user-card/>
+        <user-card
+          @after-fetch-user="afterFetchUser"
+        />
       </div>
       <div class="col-md-9">
         <div class="mt-3 mt-md-0 text-center text-md-left">
@@ -42,6 +44,7 @@ module.exports = {
     return {
       repos: [],
       page: 1,
+      totalPage: 0,
       observe: null,  // 監看滾動分頁
       isLoading: false
     }
@@ -72,9 +75,6 @@ module.exports = {
         this.repos.push(...newRepos)
         this.isLoading = false
 
-        // A flag for loadMoreRepos()
-        return data.length
-
       } catch (err) {
         this.isLoading = false
         console.log(err)
@@ -92,13 +92,16 @@ module.exports = {
 
       // 滿足條件時 loadMore
       this.page += 1
-      const size = await this.fetchRepos(this.page)
+      await this.fetchRepos(this.page)
 
       // 如分頁資料已全數加載，移除 observe
-      if (size < LIMIT) {
+      if (this.page === this.totalPage) {
         this.observe.disconnect()
         this.observe = null
       }
+    },
+    afterFetchUser(count) {
+      this.totalPage = Math.ceil(count / LIMIT)
     }
   }
 }

@@ -25,18 +25,20 @@ module.exports = {
     }
   },
   created() {
-    this.fetchOwner()
+    this.fetchUser()
   },
   methods: {
-    async fetchOwner() {
+    async fetchUser() {
       try {
         const { data } = await githubAPI.getUser('https://api.github.com/users/lastor-chen')
 
         this.user = {
           avatar_url: data.avatar_url,
           name: data.name,
-          accountName: data.login
+          accountName: data.login,
         }
+
+        this.$emit('after-fetch-user', data.public_repos)
 
       } catch (err) {
         console.log(err)
