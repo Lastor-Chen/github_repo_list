@@ -15,7 +15,8 @@
         <span>Updated {{repo.updated_at | fromNow}}</span>
       </div>
       <hr>
-      <p class="card-text">{{repo.description || 'No description...'}}</p>
+      <p class="card-text" v-if="repo.description">{{repo.description}}</p>
+      <p class="card-text text-muted" v-else>No description...</p>
     </div>
   </div>
 </template>

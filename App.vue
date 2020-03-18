@@ -14,7 +14,8 @@
             v-for="repo in repos"
             :key="repo.id"
             :repo="repo"
-          />
+          ></repo-card>
+          <spinner v-if="isLoading"></spinner>
         </div>
         <div id="ob" ref="ob"></div>
       </div>
@@ -25,17 +26,20 @@
 <script>
 const UserCard = httpVueLoader('./components/UserCard.vue')
 const RepoCard = httpVueLoader('./components/RepoCard.vue')
+const Spinner = httpVueLoader('./components/Spinner.vue')
 
 module.exports = {
   components: {
     UserCard,
-    RepoCard
+    RepoCard,
+    Spinner
   },
   data() {
     return {
       repos: [],
       page: 1,
-      observe: null  // 監看滾動分頁
+      observe: null,  // 監看滾動分頁
+      isLoading: false
     }
   },
   created() {
@@ -48,6 +52,7 @@ module.exports = {
   methods: {
     async fetchRepos(page) {
       try {
+        this.isLoading = true
         const { data } = await githubAPI.getRepos(page)
 
         const newRepos = data.map(repo => ({
@@ -61,9 +66,13 @@ module.exports = {
         }))
 
         this.repos.push(...newRepos)
+        this.isLoading = false
+
+        // A flag for loadMoreRepos()
         return data.length
 
       } catch (err) {
+        this.isLoading = false
         console.log(err)
       }
     },
