@@ -10,6 +10,7 @@ View in Github Pages - [Link](https://lastor-chen.github.io/github_repo_list/)
 * UI 參考 Github Your Repositories 頁面，進行簡化
 * 支持 RWD
 * 加載中，會顯示 Loading Spinner 特效
+* 如 Github API 無回應，會 alert 錯誤訊息
 
 ※ 已確認，可正常工作的瀏覽器 Chrome、Firefox、Edge <br>
 ※ 已確認，無法工作的瀏覽器 IE
@@ -29,6 +30,7 @@ View in Github Pages - [Link](https://lastor-chen.github.io/github_repo_list/)
 * Bootstrap
 * axios
 * moment.js
+* SweetAlert2
 
 ## 其他說明
 本地端執行時，因使用了 JS module，會出現 CORS 錯誤。<br>
