@@ -30,7 +30,7 @@ module.exports = {
   methods: {
     async fetchOwner() {
       try {
-        const { data } = await axios.get('https://api.github.com/users/lastor-chen')
+        const { data } = await githubAPI.getUser('https://api.github.com/users/lastor-chen')
 
         this.user = {
           avatar_url: data.avatar_url,

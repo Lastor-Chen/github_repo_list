@@ -1,14 +1,25 @@
-// title (標題)、description (專案描述)、url (專案網址)，其餘資訊自行決定
+// 套件均使用 CDN 由 index.html 引入
 
-// 設定 API tools
+// API tools
+// ==================================
 const apiHelper = axios.create({
   baseURL: 'https://api.github.com'
 })
 
-function getRepos({ page, limit }) {
-  return apiHelper.get(`/users/lastor-chen/repos?sort=updated&page=${page}&per_page=${limit}`)
+const USER = 'lastor-chen'  // github username
+const LIMIT = 6             // page limit
+
+const githubAPI = {
+  getRepos(page) {
+    return apiHelper.get(`/users/${USER}/repos?sort=updated&page=${page}&per_page=${LIMIT}`)
+  },
+  getUser() {
+    return apiHelper.get(`https://api.github.com/users/${USER}`)
+  }
 }
 
+// Vue config
+// ==================================
 const App = httpVueLoader('./App.vue')
 
 new Vue({

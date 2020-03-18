@@ -34,7 +34,6 @@ module.exports = {
   data() {
     return {
       repos: [],
-      limit: 6,
       page: 1
     }
   },
@@ -48,7 +47,7 @@ module.exports = {
   methods: {
     async fetchRepos(page) {
       try {
-        const { data } = await getRepos({ page, limit: this.limit})
+        const { data } = await githubAPI.getRepos(page)
 
         const newRepos = data.map(repo => ({
           id: repo.id,
