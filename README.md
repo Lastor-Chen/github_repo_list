@@ -9,7 +9,7 @@ View in Github Pages - [Link](https://lastor-chen.github.io/github_repo_list/)
   * 當 Repos 全數加載完畢後，會解除 Observer 釋放效能。
 * UI 參考 Github Your Repositories 頁面，進行簡化
 * 支持 RWD
-* 加載中，會顯示 Loading Spinner 特效 (Spinner 使用網路現成資源)
+* 加載中，會顯示 Loading Spinner 特效
 
 ※ 已確認，可正常工作的瀏覽器 Chrome、Firefox、Edge <br>
 ※ 已確認，無法工作的瀏覽器 IE

@@ -17,7 +17,11 @@
             :key="repo.id"
             :repo="repo"
           ></repo-card>
-          <spinner v-if="isLoading"></spinner>
+          <div class="text-center" v-if="isLoading">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
         </div>
         <div id="ob" ref="ob"></div>
       </div>
@@ -28,13 +32,11 @@
 <script>
 const UserCard = httpVueLoader('./components/UserCard.vue')
 const RepoCard = httpVueLoader('./components/RepoCard.vue')
-const Spinner = httpVueLoader('./components/Spinner.vue')
 
 module.exports = {
   components: {
     UserCard,
-    RepoCard,
-    Spinner
+    RepoCard
   },
   data() {
     return {
