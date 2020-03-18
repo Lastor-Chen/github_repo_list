@@ -79,6 +79,8 @@ module.exports = {
       }
     },
     async loadMoreRepos(entries) {
+      if (this.isLoading) return
+
       // ob 初始化時，不加載
       const { isIntersecting } = entries[0]
       const windowHeight = window.innerHeight
