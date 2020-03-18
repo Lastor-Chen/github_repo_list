@@ -18,7 +18,7 @@ module.exports = {
   data() {
     return {
       user: {
-        avatar_url: '',
+        avatar_url: 'https://via.placeholder.com/253?text=No+Image',  // default img
         name: '',
         accountName: ''
       }
