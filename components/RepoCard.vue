@@ -11,7 +11,9 @@
       </div>
       <a :href="repo.html_url">{{repo.html_url}}</a>
       <div class="repo-info my-3">
-        <span class="lang-dot mr-3">{{repo.language}}</span>
+        <span class="lang-dot mr-3" :data-color="repo.language">
+          {{repo.language}}
+        </span>
         <span>Updated {{repo.updated_at | fromNow}}</span>
       </div>
       <hr>
@@ -46,10 +48,21 @@ module.exports = {
 .lang-dot::before {
   display: inline-block;
   content: '';
-  background-color: #000;
   border-radius: 50%;
   margin-right: 0.2rem;
   width: .75rem;
   height: .75rem;
+}
+
+.lang-dot[data-color="Vue"]::before {
+  background-color: #000;
+}
+
+.lang-dot[data-color="JavaScript"]::before {
+  background-color: #f1e05a;
+}
+
+.lang-dot[data-color="HTML"]::before {
+  background-color: #e34c26;
 }
 </style>
