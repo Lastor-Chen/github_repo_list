@@ -2,9 +2,8 @@
   <div class="container py-5">
     <div class="row">
       <div class="col-md-3">
-        <user-card
-          @after-fetch-user="afterFetchUser"
-        />
+        <user-card @after-fetch-user="afterFetchUser"></user-card>
+        <div class="bg-img mt-5" ref="bgImg"></div>
       </div>
       <div class="col-md-9">
         <div class="mt-3 mt-md-0 text-center text-md-left">
@@ -53,8 +52,14 @@ module.exports = {
     this.fetchRepos(this.page)
   },
   mounted() {
+    // 滾動分頁
     this.observe = new IntersectionObserver(this.loadMoreRepos)
     this.observe.observe(this.$refs.ob)
+
+    // 視差滾動 (行動裝置時，不動作)
+    if (window.innerWidth > 768) {
+      window.addEventListener('scroll', this.handleScroll)
+    }
   },
   methods: {
     async fetchRepos(page) {
@@ -100,9 +105,33 @@ module.exports = {
         this.observe = null
       }
     },
+    handleScroll(e) {
+      // 行動裝置時，不動作
+      if (window.innerWidth < 768) return
+
+      const bgImg = this.$refs.bgImg
+      const scrollTop = window.scrollY.toFixed(1)
+      
+      bgImg.style.backgroundPositionY = (scrollTop * 0.7) + 'px'
+      bgImg.style.opacity = (scrollTop * 0.0005)
+    },
     afterFetchUser(count) {
       this.totalPage = Math.ceil(count / LIMIT)
     }
   }
 }
 </script>
+
+<style>
+@media screen and (min-width: 768px) {
+  .bg-img {
+    height: 80%;
+    width: 300px;
+    background: url('./img/gundamcat.png') no-repeat;
+    background-size: contain;
+    opacity: 0;
+    position: absolute;
+    top: 50vh;
+  }
+}
+</style>

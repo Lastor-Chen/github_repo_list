@@ -7,12 +7,13 @@ View in Github Pages - [Link](https://lastor-chen.github.io/github_repo_list/)
 * 串接 [Github API](https://developer.github.com/v3/)，列出自己的 Repositories
 * 無限滾動分頁，使用 IntersectionObserver API
   * 當 Repos 全數加載完畢後，會解除 Observer 釋放效能。
-* UI 參考 Github Your Repositories 頁面，進行簡化
+* 背景圖視差滾動效果 (行動裝置時不動作，效能優化)
+* UI 設計，參考 Github Your Repositories 頁面，進行簡化
 * 支持 RWD
 * 加載中，會顯示 Loading Spinner 特效
 * 如 Github API 無回應，會 alert 錯誤訊息
 
-※ 已確認，可正常工作的瀏覽器 Chrome、Firefox、Edge <br>
+※ 已確認，可正常工作的瀏覽器 Chrome、Firefox <br>
 ※ 已確認，無法工作的瀏覽器 IE
 
 ## 技術說明
