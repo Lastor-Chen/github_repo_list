@@ -37,7 +37,7 @@ module.exports = {
 }
 </script>
 
-<style>
+<style scoped>
 .repo-info {
   font-size: .85rem;
   color: #586069;
