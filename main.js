@@ -7,7 +7,7 @@ const apiHelper = axios.create({
 })
 
 const USER = 'lastor-chen'  // github username
-const LIMIT = 6             // page limit
+const LIMIT = 7             // page limit
 
 const githubAPI = {
   getRepos(page) {

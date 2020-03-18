@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-9">
         <span class="font-weight-bold">Repositories</span>
-        <span>{{repos.length}}</span>
+        <span class="badge badge-pill badge-secondary">{{repos.length}}</span>
         <hr>
         <div class="position-relative">
           <repo-card
@@ -54,6 +54,8 @@ module.exports = {
           name: repo.name,
           description: repo.description,
           html_url: repo.html_url,
+          language: repo.language,
+          homepage: repo.homepage,
           updated_at: repo.updated_at
         }))
 
