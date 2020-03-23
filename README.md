@@ -21,7 +21,7 @@ View in Github Pages - [Link](https://lastor-chen.github.io/github_repo_list/)
 搭配相關套件，拆分頁面 Components，不需 webpack 打包即可瀏覽。
 
 仿照 vue-cli，以 main.js 作為進入點，並用 App.vue 作為 main viewer。 <br>
-由於 http-vue-loader 不支持 js 檔案 import，故將自製的 API tools function 放置於 main.js。
+由於 http-vue-loader 不支持 js import，故將 API tools function 於 main.js 引入。
 
 #### 使用套件
 套件均使用 CDN 引入。
