@@ -43,6 +43,7 @@ module.exports = {
     return {
       repos: [],
       page: 1,
+      LIMIT: githubAPI.pageLimit,
       totalPage: 0,
       observe: null,  // 監看滾動分頁
       isLoading: false
@@ -116,7 +117,7 @@ module.exports = {
       bgImg.style.opacity = (scrollTop * 0.0005)
     },
     afterFetchUser(count) {
-      this.totalPage = Math.ceil(count / LIMIT)
+      this.totalPage = Math.ceil(count / this.LIMIT)
     }
   }
 }
