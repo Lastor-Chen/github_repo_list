@@ -2,22 +2,10 @@
 
 // API tools
 // ==================================
-const apiHelper = axios.create({
-  baseURL: 'https://api.github.com'
-})
+import githubAPI from './apis/githubAPI.js'
 
-const USER = 'lastor-chen'  // github username
-const LIMIT = 7             // page limit
-const SORT_BY = 'pushed'
-
-const githubAPI = {
-  getRepos(page) {
-    return apiHelper.get(`/users/${USER}/repos?sort=${SORT_BY}&page=${page}&per_page=${LIMIT}`)
-  },
-  getUser() {
-    return apiHelper.get(`https://api.github.com/users/${USER}`)
-  }
-}
+// 註冊到全域上，供 Vue 組件使用
+window.githubAPI = githubAPI
 
 // Vue config
 // ==================================
